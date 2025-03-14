@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pair Code</title>
+  <title>angle-md Pair Code</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
@@ -12,14 +12,44 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background: black;
+      background: linear-gradient(135deg, #000000, #434343);
+      overflow: hidden;
       font-family: Arial, sans-serif;
+    }
+
+    .matrix {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+      color: rgba(0, 255, 0, 0.5);
+      font-size: 20px;
+      font-family: monospace;
+    }
+
+    .matrix div {
+      position: absolute;
+      width: 20px;
+      height: 100%;
+      top: 0;
+      animation: matrix-fall linear infinite;
+    }
+
+    @keyframes matrix-fall {
+      0% {
+        top: -100%;
+      }
+      100% {
+        top: 100%;
+      }
     }
 
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
+      z-index: 1;
     }
 
     .box {
@@ -32,7 +62,6 @@
       border-radius: 10px;
       transform: perspective(1000px) rotateY(0deg);
       box-shadow: 0 0 20px rgba(250, 249, 249, 0.7);
-      position: relative;
     }
 
     #text {
@@ -81,19 +110,20 @@
     .input-container button {
       flex-basis: 15%;
       padding: 1rem;
-      background: #5935ac;
+      background: #000000;
       font-weight: 700;
       letter-spacing: 0.3rem;
       text-transform: uppercase;
       color: white;
-      border: none;
+      border: 2px solid red;
       width: 90%;
       border-radius: 0 1rem 1rem 0;
       transition: all 0.2s ease-in-out;
     }
 
     .input-container button:hover {
-      background: linear-gradient(135deg, #c01736 0%, #8b17b6 100%);
+      background-color: yellow;
+      border-color: pink;
     }
 
     @media (max-width: 500px) {
@@ -136,18 +166,19 @@
   </style>
 </head>
 <body>
+  <div class="matrix"></div>
   <div class="container">
     <div class="main">
       <div class="box" id="box">
         <div id="text">
           <i class="fa fa-user"></i>
           <p>
-            <h3 class="centered-text">WASITECH PAIRING CODE</h3>
+            <h3 class="centered-text">ANGLE MD SESSIONS</h3>
             <br>
-            <h6>Made By WASI TECH🔥.</h6>
+            <h6> JAVIEL PAIR CODES.</h6>
             <h6>Enter Your Number with Country Code.</h6>
             <div class="input-container">
-              <input placeholder="923192173xxx" type="number" id="number" placeholder="Enter your Phone Pumber with Cuntry Code" name="">
+              <input placeholder="254112167xxx" type="number" id="number" placeholder="Enter your Phone Number with Country Code" name="">
               <button id="submit">Submit</button>
             </div>
             
@@ -165,7 +196,6 @@
     let a = document.getElementById("pair");
     let b = document.getElementById("submit");
     let c = document.getElementById("number");
-    let box = document.getElementById("box");
 
     async function Copy() {
       let text = document.getElementById("copy").innerText;
@@ -176,7 +206,7 @@
       obj.size = "5";
       setTimeout(() => {
         obj.innerText = text;
-        obj.style = "color:white;font-weight-bold";
+        obj.style = "color:white;font-weight:bold";
         obj.size = "5";
       }, 500);
     }
@@ -211,6 +241,25 @@
         a.innerHTML = '<font id="copy" onclick="Copy()" style="color:red;font-weight:bold" size="5">CODE: <span style="color:white;font-weight:bold">' + code + '</span></font><br><br><br>';
       }
     });
+
+    function createMatrix() {
+      const matrixContainer = document.querySelector('.matrix');
+      const columns = Math.floor(window.innerWidth / 20);
+      for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.style.left = `${i * 20}px`;
+        column.style.animationDuration = `${Math.random() * 5 + 2}s`;
+        matrixContainer.appendChild(column);
+
+        for (let j = 0; j < 30; j++) {
+          const char = document.createElement('span');
+          char.innerText = String.fromCharCode(0x30A0 + Math.random() * 96);
+          column.appendChild(char);
+        }
+      }
+    }
+
+    createMatrix();
   </script>
 </body>
 </html>
